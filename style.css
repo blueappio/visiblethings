@@ -1,0 +1,34 @@
+.thing {
+  padding: 10px;
+  font-size: large;
+  font-weight: 500;
+}
+md-toast.md-success-toast-theme {
+    background-color: green;
+}
+md-toast.md-error-toast-theme {
+    background-color: red;
+}
+.visibleThings h2 {
+	color: #28ade5;
+}
+
+label {
+    color: #BDBDBD;
+}
+ul
+{
+    list-style-type: none;
+    color: #6E6E6E;
+}
+
+h2 {
+    margin-bottom: 5px;
+}
+
+
+.data {
+    width: 60%;
+    margin-top: 20px;
+    border-bottom: 1px dotted #D8D8D8;
+}
