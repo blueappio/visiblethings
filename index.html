@@ -4,105 +4,103 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!-- Origin Trial Token -->
         <meta http-equiv="origin-trial" content="Avc8YMwIqejCHjHsP50Ub/Em7KvoZ/LpO+4na54Q/fQYd/0WHGGX8qP6WPFVf7KFEYYVnFT8NcarPKD+YR8tTgoAAABeeyJvcmlnaW4iOiAiaHR0cHM6Ly9ibHVlYXBwaW8uZ2l0aHViLmlvOjQ0MyIsICJmZWF0dXJlIjogIldlYkJsdWV0b290aCIsICJleHBpcnkiOiAxNDczMjY0NjA1fQ==" />
+
         <title>Visible things</title>
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.9.7/angular-material.min.css'>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css"/>
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-aria.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.8.2/angular-material.min.js'></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.5/angular-nvd3.min.js"></script>
+
+        <script src="https://blueappio.github.io/blueapp.io/blueapp.io.min.js"></script>
+        <script src="visiblethings.js"></script>
+        <script src="utility.js"></script>
+        <script src="app.js"></script>
     </head>
-    
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-aria.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.8.2/angular-material.min.js'></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.5/angular-nvd3.min.js"></script>
+    <body ng-app="visibleThings">
+        <div ng-controller="mainController">
 
-    <script src="https://blueappio.github.io/blueapp.io/blueapp.io.min.js"></script>
-    <script src="visiblethings.js"></script>
-    <script src="app.js"></script>
 
-    <body ng-app="visibleThings" class="visibleThings thing">
-        <div ng-controller="mainController as main" md-theme-watch="true">
-            <div ng-repeat="peripheral in visibleThings.peripherals">
-                <h2>{{peripheral.name}}</h2>
+            <div ng-repeat="peripheral in data">
+
+                <h2> {{ peripheral.name }}  </h2>
+
                 <div class="layout-wrap layout-row flex-100" layout="row" flex="100" layout-wrap="">
-                    <div layout="column" flex="100" flex-gt-lg="50" flex-gt-sm="100" flex-gt-md="50" class="layout-column flex-gt-sm-50 flex-100">
-                        <div class="data">
-                        <label>Temperature data</label>
-                        <ul>
-                            <li>{{ peripheral.temperature}}</li>
-                        </ul>
-                        </div>
-                        <nvd3 options="tempOptions" data="peripheral.tempGraphData" style="margin-left: -30px;" ng-show="peripheral.tempData"></nvd3>
-                    </div>
-                    <div layout="column" flex="100" flex-gt-lg="50" flex-gt-sm="100" flex-gt-md="50" class="layout-column flex-gt-sm-50 flex-100">
-                        <div class="data">
-                            <label>Humidity data</label>
-                            <ul>
-                                <li>{{ peripheral.humidity}}</li>
-                            </ul>
-                        </div>
-                        <nvd3 options="humidityOptions" data="peripheral.humidityGraphData" style="margin-left: -30px;" ng-show="peripheral.humidityData"></nvd3>
-                    </div>
-                    <div layout="column" flex="100" flex-gt-lg="50" flex-gt-sm="100"  flex-gt-md="50" class="layout-column flex-gt-sm-50 flex-100">
-                        <div class="data">
-                            <label>Gyroscope data</label>
-                            <ul>
-                                <li>x: {{ peripheral.gyro_1}}</li>
-                                <li>y: {{ peripheral.gyro_2}}</li>
-                                <li>z: {{ peripheral.gyro_3}}</li>
-
-                            </ul>
-                        </div>
-                        <nvd3 options="gyroOptions" data="peripheral.giroGraphData" style="margin-left: -30px;" ng-show="peripheral.gyroData"></nvd3>
-                    </div>
-
-                    <div layout="column" flex="100" flex-gt-lg="50" flex-gt-sm="100"  flex-gt-md="50" class="layout-column flex-gt-sm-50 flex-100">
-                        <div class="data">
-                            <label>Acceleration data</label>
-                            <ul>
-                                <li>x: {{ peripheral.acc_1}}</li>
-                                <li>y: {{ peripheral.acc_2}}</li>
-                                <li>z: {{ peripheral.acc_3}}</li>
-
-                            </ul>
+                        <div layout="column" flex="100" flex-gt-lg="20" flex-gt-sm="50" flex-gt-md="33" class="layout-column flex-gt-sm-20 flex-100">
+                            <div class="data">
+                                <div class="layout-wrap layout-row flex-100" layout="row" flex="100" layout-wrap="">
+                                    <label layout="column" flex="100" flex-gt-lg="40" flex-gt-sm="40" flex-gt-md="40" class="layout-column flex-gt-sm-40 flex-100">Temperature (°C/°F)</label>
+                                    <div layout="column" flex="100" flex-gt-lg="40" flex-gt-sm="40" flex-gt-md="40" class="layout-column flex-gt-sm-40 flex-100">   {{ peripheral.currTempC }} / {{ peripheral.currTempF}} </div>
+                                </div>
+                            </div>
+                            <nvd3 options="options" data="peripheral.temp"></nvd3>
                         </div>
 
-                        <nvd3 options="accOptions" data="peripheral.accGraphData" style="margin-left: -30px;" ng-show="peripheral.accData"></nvd3>
-                    </div>
-
-                    <div layout="column" flex="100" flex-gt-lg="50" flex-gt-sm="100" flex-gt-md="50" class="layout-column flex-gt-sm-50 flex-100">
-                        <div class="data">
-                            <label>Magnetic field data</label>
-                            <ul>
-                                <li>x: {{ peripheral.mag_1}}</li>
-                                <li>y: {{ peripheral.mag_2}}</li>
-                                <li>z: {{ peripheral.mag_3}}</li>
-
-                            </ul>
+                        <div layout="column" flex="100" flex-gt-lg="20" flex-gt-sm="50" flex-gt-md="33" class="layout-column flex-gt-sm-20 flex-100">
+                            <div class="data">
+                                <div class="layout-wrap layout-row flex-100" layout="row" flex="100" layout-wrap="">
+                                    <label layout="column" flex="100" flex-gt-lg="30" flex-gt-sm="30" flex-gt-md="30" class="layout-column flex-gt-sm-30 flex-100">Humidity (%rH)</label>
+                                    <div layout="column" flex="100" flex-gt-lg="70" flex-gt-sm="70" flex-gt-md="70" class="layout-column flex-gt-sm-70 flex-100">   {{ peripheral.currHum  }} </div>
+                                </div>
+                            </div>
+                            <nvd3 options="options" data="peripheral.hum"></nvd3>
                         </div>
 
-                        <nvd3 options="magOptions" data="peripheral.magGraphData" style="margin-left: -30px;" ng-show="peripheral.magData"></nvd3>
-                    </div>
 
-                    <div layout="column" flex="100" flex-gt-lg="50" flex-gt-sm="100" flex-gt-md="50" class="layout-column flex-gt-sm-50 flex-100">
-                        <div class="data">
-                            <label>Light sensor data</label>
-                            <ul>
-                                <li>x: {{ peripheral.light_1}}</li>
-                                <li>y: {{ peripheral.light_2}}</li>
-                                <li>z: {{ peripheral.light_3}}</li>
-
-                            </ul>
+                        <div layout="column" flex="100" flex-gt-lg="20" flex-gt-sm="50" flex-gt-md="33" class="layout-column flex-gt-sm-50 flex-100">
+                            <div class="data">
+                                <div class="layout-wrap layout-row flex-100" layout="row" flex="100" layout-wrap="">
+                                    <label layout="column" flex="100" flex-gt-lg="35" flex-gt-sm="35" flex-gt-md="35" class="layout-column flex-gt-sm-35 flex-100">Light (mW/cm2)</label>
+                                    <div layout="column" flex="100" flex-gt-lg="65" flex-gt-sm="65" flex-gt-md="65" class="layout-column flex-gt-sm-65 flex-100">x: {{ peripheral.currLight[0] }} klux  / y: {{ peripheral.currLight[1]}} / z: {{ peripheral.currLight[2]}} </div>
+                                </div>
+                            </div>
+                            <nvd3 options="options" data="peripheral.light"></nvd3>
                         </div>
 
-                    </div>
+                        <div layout="column" flex="100" flex-gt-lg="20" flex-gt-sm="50" flex-gt-md="33" class="layout-column flex-gt-sm-50 flex-100">
+                            <div class="data">
+                                <div class="layout-wrap layout-row flex-100" layout="row" flex="100" layout-wrap="">
+                                    <label layout="column" flex="100" flex-gt-lg="25" flex-gt-sm="25" flex-gt-md="25" class="layout-column flex-gt-sm-25 flex-100">Accel. (G)</label>
+                                    <div layout="column" flex="100" flex-gt-lg="75" flex-gt-sm="75" flex-gt-md="75" class="layout-column flex-gt-sm-75 flex-100">x: {{ peripheral.currAcc[0]}} &nbsp; / &nbsp;y: {{ peripheral.currAcc[1]}} &nbsp;/ &nbsp;z: {{ peripheral.currAcc[2]}} </div>
+                                </div>
+                            </div>
+                            <nvd3 options="options" data="peripheral.acc"></nvd3>
+                        </div>
 
+                        <div layout="column" flex="100" flex-gt-lg="20" flex-gt-sm="50" flex-gt-md="33" class="layout-column flex-gt-sm-50 flex-100">
+                            <div class="data">
+                                <div class="layout-wrap layout-row flex-100" layout="row" flex="100" layout-wrap="">
+                                    <label layout="column" flex="100" flex-gt-lg="35" flex-gt-sm="35" flex-gt-md="35" class="layout-column flex-gt-sm-35 flex-100">Gyroscope (deg/s)</label>
+                                    <div layout="column" flex="100" flex-gt-lg="65" flex-gt-sm="65" flex-gt-md="65" class="layout-column flex-gt-sm-65 flex-100">x: {{ peripheral.currGyro[0]}} &nbsp; / &nbsp;y: {{ peripheral.currGyro[1]}} &nbsp;/ &nbsp;z: {{ peripheral.currGyro[2]}} </div>
+                                </div>
+                            </div>
+                            <nvd3 options="options" data="peripheral.gyro"></nvd3>
+                        </div>
+
+                        <div layout="column" flex="100" flex-gt-lg="20" flex-gt-sm="50" flex-gt-md="33" class="layout-column flex-gt-sm-50 flex-100">
+                            <div class="data">
+                                <div class="layout-wrap layout-row flex-100" layout="row" flex="100" layout-wrap="">
+                                    <label layout="column" flex="100" flex-gt-lg="30" flex-gt-sm="30" flex-gt-md="30" class="layout-column flex-gt-sm-30 flex-100">Mag. Field (µT)</label>
+                                    <div layout="column" flex="100" flex-gt-lg="70" flex-gt-sm="70" flex-gt-md="70" class="layout-column flex-gt-sm-70 flex-100">x: {{ peripheral.currMag[0]}} &nbsp; / &nbsp;y: {{ peripheral.currMag[1]}} &nbsp;/ &nbsp;z: {{ peripheral.currMag[2]}} </div>
+                                </div>
+                            </div>
+                            <nvd3 options="options" data="peripheral.mag"></nvd3>
+                        </div>
                 </div>
+            </div>
+            <div class="emptymsg w3-animate-opacity">
+                <p style="position: absolute; left: 10%" >Searching for Devices...</p>
             </div>
         </div>
     </body>

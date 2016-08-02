@@ -14,21 +14,58 @@ md-toast.md-error-toast-theme {
 }
 
 label {
-    color: #BDBDBD;
+    color: #2287c1;
 }
 ul
 {
     list-style-type: none;
     color: #6E6E6E;
+    padding-left: 0;
 }
 
 h2 {
+    margin-left: 5px;
     margin-bottom: 5px;
+    color: #2287c1;
 }
 
 
 .data {
-    width: 60%;
+    width: 95%;
+    height: 40px;
     margin-top: 20px;
-    border-bottom: 1px dotted #D8D8D8;
+    margin-left: 5px;
+    display: inline;
+    font-size: 14px;
+    color: #2287c1;
 }
+
+ul li{
+    display: inline;
+    font-size: 15px;
+    color: #2287c1;
+}
+
+.emptymsg {
+    position: fixed;
+    top: 5%;
+    left: 2%;
+    background-color: green;
+    color:white;
+    height: 50px;
+    width: 240px;
+    border-radius: 5px;
+}
+
+div + .emptymsg {
+    display: none;
+}
+
+h5 {
+    font-size: 10px;
+}
+
+nvd3 {
+    margin-left: -40px;
+}
+
