@@ -13,10 +13,10 @@
                 function onScan(peripheral) {
                     var mfrData;
 
-                    if (peripheral.advdata && !isEmpty(peripheral.advdata.manufacturerData)) {
+                    mfrData = peripheral.getMfrData('1019');
+
+                    if (!mfrData) {
                         mfrData = peripheral.advdata.manufacturerData['1019'];
-                    } else {
-                        mfrData = peripheral.getMfrData('1019');
                     }
 
                     // console.log(mfrData);
@@ -152,12 +152,4 @@ function storeHumData(peripheral, data, extracted, count, currDate) {
             value: extracted
         };
     }
-}
-
-function isEmpty(obj) {
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
-    }
-    return JSON.stringify(obj) === JSON.stringify({});
 }
