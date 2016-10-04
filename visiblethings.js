@@ -15,7 +15,7 @@
 
                     mfrData = peripheral.getMfrData('1019');
 
-                    if (!mfrData) {
+                    if (!mfrData && peripheral.advdata) {
                         mfrData = peripheral.advdata.manufacturerData['1019'];
                     }
 
