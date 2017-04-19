@@ -19,7 +19,7 @@ app.controller('mainController', function($scope, $mdToast){
     $scope.data={};
 
     // Disabling the mouse right click event
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('contextmenu', function(event) { event.preventDefault();});
 
     // ---------- Graph Code START -----------
     
